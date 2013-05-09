@@ -3,5 +3,9 @@ body {
 }
 
 p {
+	display: none;
+}
+
+._li {
 	display: block;
 }
