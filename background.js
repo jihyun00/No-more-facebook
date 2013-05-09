@@ -51,7 +51,7 @@ if(setting == 'collecttime') {
 		var interval = fintime - nowtime;
 		var interval = interval * 60000;
 
-		if(interval <0) {
+		if(interval < 0) {
 			initcss();
 		}
 
@@ -72,7 +72,7 @@ function changecss() {
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if(tab.url.search('facebook.com') != -1) {
 			chrome.tabs.insertCSS(tabId, {file: "change.css"});
-			//chrome.tabs.executeScript(tabId, {code:"document.write='페이스북을 사용할 수 없는 시간입니다!'"});
+			chrome.tabs.executeScript(tabId, {file:"script.js"});
 		}
 	});
 }
