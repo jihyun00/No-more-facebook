@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+
+  "name": "No More Facebook",
+  "description": "페이스북에 접속하는 것을 차단해주고, 페이스북에 머무르는 시간을 그래프로 보여주는 프로그램입니다.",
+  "version": "0.1.0",
+
+  // Pick one (or none)
+  "browser_action": {
+  	"default_popup": "popup.html"
+  	},
+
+  // Add any of these that you need
+  "background": {
+  	"page": "background.html"
+  	},
+/*
+  "content_scripts": [
+  	 {
+      "matches": [
+        "http://www.facebook.com/*"
+      ],
+
+      "js": [
+      	"jquery.js",
+      	"contentscript.js"
+      	],
+
+  	"css": [
+		"contentscript.css"
+	],
+      
+	"run_at": "document_start"
+    }
+  ],*/
+  
+  "options_page": "popup.html",
+  
+  "permissions": [
+  	"https://www.facebook.com/*",
+  	"tabs",
+    "alarms"
+  ]
+}
