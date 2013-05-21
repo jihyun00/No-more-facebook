@@ -72,7 +72,7 @@ function changecss() {
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if(tab.url.search('facebook.com') != -1) {
 			chrome.tabs.insertCSS(tabId, {file: "change.css"});
-			chrome.tabs.executeScript(tabId, {file:"script.js"});
+			//chrome.tabs.executeScript(tabId, {file:"script.js"});
 		}
 	});
 }
@@ -81,12 +81,12 @@ function initcss() {
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if(tab.url.search('facebook.com') != -1) {
 			chrome.tabs.insertCSS(tabId, {file: "init.css"});
+			//chrome.tabs.executeScript(tabId, {file:"delete.js"});
 		}
 	});
 }
-
-//좋아요 측정
 /*
+//좋아요 측정
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	chrome.tabs.move(tabId, moveProperties, function() {
 		if(tab.url.search('좋아합니다.') != -1) {
@@ -104,8 +104,9 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	}
 });
 */
-
+/*
 //페이스북 좋아요, 댓글, 업데이트 횟수
+//업데이트 횟수
 window.fbAsyncInit = function() {
 	FB.init({
 		appId: "387137241401615",  // 앱 생성후 발급 받은 앱ID
@@ -113,6 +114,8 @@ window.fbAsyncInit = function() {
 		cookie: true,
 		xfbml: true
 	});
+
+
 	function facebookStats(){
 		FB.getLoginStatus(function(response) {   // FB API 를 이용한 로그인 상태 체크
 			if (response.status === 'connected') {   // FaceBook 에 로그인 되어 있다면
@@ -122,7 +125,7 @@ window.fbAsyncInit = function() {
 				FB.api(   // FB API 를 이용한 FQL 쿼리 사용
 					{
 						method: 'fql.query',
-						query: 'SELECT message FROM status WHERE uid ='  + uid //user id 갖고 옴
+						query: 'SELECT uid, message, time FROM status WHERE uid=' + uid + 'AND time>=1367366400' //user id 갖고 옴
 					},
 
 					function(response) {
@@ -138,4 +141,17 @@ window.fbAsyncInit = function() {
 		});
 	}
 }
+*/
+//oauth 인증하여 페이스북 로그인
+var facebook = new OAuth2('facebook', {
+	client_id: '387137241401615',
+	client_secret: '1b4a7e6580e49ff2fd21eb1f35aaf331',
+	api_scope: 'read_stream,user_likes,xmpp_login,publish_actions'
+//뉴스피드 접근, 좋아요 누르기, 페이스북 대화, 댓글 달기, 글작성
+});
+
+facebook.authorize(function() {
+	//code
+
+});
 

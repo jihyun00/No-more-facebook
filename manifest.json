@@ -14,30 +14,20 @@
   "background": {
   	"page": "background.html"
   	},
-/*
-  "content_scripts": [
-  	 {
-      "matches": [
-        "http://www.facebook.com/*"
-      ],
 
-      "js": [
-      	"jquery.js",
-      	"contentscript.js"
-      	],
-
-  	"css": [
-		"contentscript.css"
-	],
-      
-	"run_at": "document_start"
-    }
-  ],*/
+    "content_scripts": [
+  {
+    "matches": ["https://developers.facebook.com/apps/387137241401615?app_id=387137241401615"],
+    "js": ["oauth/oauth2_inject.js"],
+    "run_at": "document_start"
+  }
+],
   
   "options_page": "popup.html",
   
   "permissions": [
   	"https://www.facebook.com/*",
-  	"tabs"
+  	"tabs",
+    "https://graph.facebook.com/oauth/access_token"
   ]
 }
