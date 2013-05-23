@@ -3,6 +3,19 @@ $(document).ready(function(){
   $('.timesetting').click(function(){
     $('.time').slideDown('slow');
   });
+
+  $("#initSetUp").click(function(e) {
+    console.log("here");
+    window['facebook'] = new OAuth2('facebook', {
+      client_id: '387137241401615',
+      client_secret: '1b4a7e6580e49ff2fd21eb1f35aaf331',
+      api_scope: 'read_stream,user_likes,xmpp_login,publish_actions',
+      redirect_uri: 'http://localhost'
+    //뉴스피드 접근, 좋아요 누르기, 페이스북 대화, 댓글 달기, 글작성
+    });
+
+    window.facebook.authorize(function() {})
+  });
 });
 
 $(function(){
@@ -10,6 +23,18 @@ $(function(){
     $('.time').slideUp('slow');
   });
 });
+
+//facebook 이미 연결했다면
+var oauth2_facebook = localStorage.getItem('oauth2_facebook');
+
+if(oauth2_facebook.search('accessToken') != -1) {
+  $(document).ready(function(){
+    $(".init").css("display","none");
+    $(".second").css("display","block");
+  });
+}
+
+
 
 //설정해 준 내역 저장
 function save_options() {

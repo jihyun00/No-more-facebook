@@ -19,6 +19,7 @@
 // oauth2.html
 
 // Get all ? params from this URL
+console.log("Hello?")
 var url = window.location.href;
 var params = '?';
 var index = url.indexOf(params);

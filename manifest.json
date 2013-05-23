@@ -17,8 +17,8 @@
 
     "content_scripts": [
   {
-    "matches": ["https://developers.facebook.com/apps/387137241401615?app_id=387137241401615"],
-    "js": ["oauth/oauth2_inject.js"],
+    "matches": ["http://localhost/*"],
+    "js": ["oauth2/oauth2_inject.js"],
     "run_at": "document_start"
   }
 ],
@@ -28,6 +28,6 @@
   "permissions": [
   	"https://www.facebook.com/*",
   	"tabs",
-    "https://graph.facebook.com/oauth/access_token"
+    "https://graph.facebook.com/"
   ]
 }

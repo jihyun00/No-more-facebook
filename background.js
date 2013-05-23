@@ -142,16 +142,3 @@ window.fbAsyncInit = function() {
 	}
 }
 */
-//oauth 인증하여 페이스북 로그인
-var facebook = new OAuth2('facebook', {
-	client_id: '387137241401615',
-	client_secret: '1b4a7e6580e49ff2fd21eb1f35aaf331',
-	api_scope: 'read_stream,user_likes,xmpp_login,publish_actions'
-//뉴스피드 접근, 좋아요 누르기, 페이스북 대화, 댓글 달기, 글작성
-});
-
-facebook.authorize(function() {
-	//code
-
-});
-
