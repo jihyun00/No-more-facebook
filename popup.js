@@ -9,12 +9,14 @@ $(document).ready(function(){
     window['facebook'] = new OAuth2('facebook', {
       client_id: '387137241401615',
       client_secret: '1b4a7e6580e49ff2fd21eb1f35aaf331',
-      api_scope: 'read_stream,user_likes,xmpp_login,publish_actions',
+      api_scope: 'read_stream,user_about_me,user_actions.news,user_activities,user_photos,user_status',
       redirect_uri: 'http://localhost'
     //뉴스피드 접근, 좋아요 누르기, 페이스북 대화, 댓글 달기, 글작성
     });
 
-    window.facebook.authorize(function() {})
+    window.facebook.authorize(function() {
+
+    })
   });
 });
 
@@ -23,18 +25,6 @@ $(function(){
     $('.time').slideUp('slow');
   });
 });
-
-//facebook 이미 연결했다면
-var oauth2_facebook = localStorage.getItem('oauth2_facebook');
-
-if(oauth2_facebook.search('accessToken') != -1) {
-  $(document).ready(function(){
-    $(".init").css("display","none");
-    $(".second").css("display","block");
-  });
-}
-
-
 
 //설정해 준 내역 저장
 function save_options() {
@@ -67,3 +57,119 @@ $(function() {
     console.log('reset success');
   });
 });
+
+//facebook 이미 연결했다면
+var oauth2_facebook = localStorage.getItem('oauth2_facebook');
+
+if(oauth2_facebook.search('accessToken') != -1) {
+  $(document).ready(function(){
+    $(".init").css("display","none");
+    $(".second").css("display","block");
+  });
+}
+
+//accessToken 얻어오기
+var oauth = oauth2_facebook;
+var oauth = JSON.parse(oauth);
+console.log(oauth.accessToken);
+
+//게시글 횟수
+var bulletin = function(callback) {
+  $.ajax({
+    type : 'get',
+    datatype : 'json',
+    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+    success : function(data) {
+      console.log(data);
+      console.log(data.posts.data);
+      var count = 0;
+
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var date = date.getDate();
+
+      if(month/10 != 1) {
+        month = '0'+ month;
+      }
+
+      var time = year + '-' + month + '-' + date;
+
+      console.log(time);
+      
+      for(i=0; i<25; i++) {
+        if(data.posts.data[i].created_time.search(time) != -1) {
+          count++;
+        }
+        console.log(count);
+      }
+    }
+  });
+}
+
+/*
+//댓글 횟수
+var comments = function(callback) {
+  $.ajax({
+    type : 'get',
+    datatype : 'json',
+    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken, //url만 바꾸면 돼!!!
+    success : function(data) {
+      console.log(data);
+      var count = 0;
+
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var date = date.getDate();
+
+      if(month/10 != 1) {
+        month = '0'+ month;
+      }
+
+      var time = year + '-' + month + '-' + date;
+
+      console.log(time);
+      
+      for(i=0; i<25; i++) {
+        if(data.posts.data[i].created_time.search(time) != -1) {
+          count++;
+        }
+        console.log(count);
+      }
+    }
+  });
+}
+
+//좋아요 횟수
+var like = function(callback) {
+  $.ajax({
+    type : 'get',
+    datatype : 'json',
+    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+    success : function(data) {
+      console.log(data);
+      var count = 0;
+
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var date = date.getDate();
+
+      if(month/10 != 1) {
+        month = '0'+ month;
+      }
+
+      var time = year + '-' + month + '-' + date;
+
+      console.log(time);
+      
+      for(i=0; i<25; i++) {
+        if(data.posts.data[i].created_time.search(time) != -1) {
+          count++;
+        }
+        console.log(count);
+      }
+    }
+  });
+}*/
