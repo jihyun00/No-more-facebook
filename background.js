@@ -24,18 +24,6 @@ var fintime = (endhour * 60) + endmin;
 
 //시간대별 block
 if(setting == 'collecttime') {
-	/*if(nowtime > starttime) {
-		var starthour = (starthour + 24) - (hour - starthour);
-		var settime = (starthour * 60) + startmin;
-		var init_interval = settime - nowtime;
-		var init_interval = init_interval * 60000;
-		var endhour = (endhour + 24) - (hour - endhour);
-		var fintime = (endhour * 60) + endmin;
-		var interval = fintime - nowtime;
-		var interval = interval * 60000;
-
-		block(init_interval, interval);
-	}*/
 	if(nowtime > starttime) {
 		var init_interval = 0;
 		var interval = fintime - nowtime;
@@ -85,3 +73,32 @@ function initcss() {
 		}
 	});
 }
+
+
+
+/*
+chrome.extension.onConnect.addListener(function(port) {
+	var tab;
+	tab = port.sender.tab;
+	console.log('added');
+
+	port.onMessage.addListener(function(data) {
+		console.log(data);
+	});
+});*/
+
+chrome.runtime.onConnect.addListener(function(port) {
+  console.assert(port.name == "like");
+  port.onMessage.addListener(function(msg) {
+    if (msg.like == "counting like")
+      //port.postMessage({question: ""});
+  		console.log('counting');
+  });
+});
+
+var comment, like = 0;
+
+//좋아요 갯수 측정
+
+
+//댓글 갯수 측정

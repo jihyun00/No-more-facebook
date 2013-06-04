@@ -16,13 +16,19 @@
   	},
 
     "content_scripts": [
-  {
-    "matches": ["http://localhost/*"],
-    "js": ["oauth2/oauth2_inject.js"],
-    "run_at": "document_start"
-  }
-],
-  
+      {
+        "matches": ["http://localhost/*"],
+        "js": ["oauth2/oauth2_inject.js"],
+        "run_at": "document_start"
+      },
+
+      {
+        "matches": ["https://www.facebook.com/*"],
+        "js": ["contentscript.js", "jquery.js"],
+        "run_at": "document_end"
+      }
+    ],
+      
   "options_page": "popup.html",
   
   "permissions": [

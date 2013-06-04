@@ -78,7 +78,7 @@ var bulletin = function(callback) {
   $.ajax({
     type : 'get',
     datatype : 'json',
-    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,    
     success : function(data) {
       console.log(data);
       console.log(data.posts.data);
@@ -88,9 +88,15 @@ var bulletin = function(callback) {
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var date = date.getDate();
+      //var hour = date.getHours();
+      //hour = hour - 9;
 
       if(month/10 != 1) {
         month = '0'+ month;
+      }
+
+      if(date/10 != 1) {
+        date = '0'+ date;
       }
 
       var time = year + '-' + month + '-' + date;
@@ -107,69 +113,19 @@ var bulletin = function(callback) {
   });
 }
 
-/*
+//시간 오류 나는 부분 있음(우리나라 시간이랑 페이스북 시간이랑 안맞으므로 보정필요 ㅜㅜ timezone 9)
+
+
 //댓글 횟수
 var comments = function(callback) {
   $.ajax({
     type : 'get',
-    datatype : 'json',
-    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken, //url만 바꾸면 돼!!!
+    datatype: 'html',
+    url : 'https://www.facebook.com/me/allactivity?privacy_source=activity_log&log_filter=cluster_116',
     success : function(data) {
-      console.log(data);
-      var count = 0;
-
-      var date = new Date();
-      var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      var date = date.getDate();
-
-      if(month/10 != 1) {
-        month = '0'+ month;
-      }
-
-      var time = year + '-' + month + '-' + date;
-
-      console.log(time);
       
-      for(i=0; i<25; i++) {
-        if(data.posts.data[i].created_time.search(time) != -1) {
-          count++;
-        }
-        console.log(count);
-      }
     }
   });
 }
 
-//좋아요 횟수
-var like = function(callback) {
-  $.ajax({
-    type : 'get',
-    datatype : 'json',
-    url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
-    success : function(data) {
-      console.log(data);
-      var count = 0;
 
-      var date = new Date();
-      var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      var date = date.getDate();
-
-      if(month/10 != 1) {
-        month = '0'+ month;
-      }
-
-      var time = year + '-' + month + '-' + date;
-
-      console.log(time);
-      
-      for(i=0; i<25; i++) {
-        if(data.posts.data[i].created_time.search(time) != -1) {
-          count++;
-        }
-        console.log(count);
-      }
-    }
-  });
-}*/
