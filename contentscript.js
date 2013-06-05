@@ -18,24 +18,29 @@ for(var i=0; i<likebutton.length; i++) {
 //페이지 바뀌면 좋아요 없어짐 -> 아마 db에 저장하면 수정할 수 있겠지
 
 //댓글 얻어오기
-var comment = 0;
-var commentarea = document.getElementsByClassName('innerWrap');
+var commentcount = 0;
 
-var extractor = new Array();
+var comment = document.getElementsByName('add_comment_text');
 
-for(var j=0; j<commentarea.length; ++j) {
-	extractor[j] = commentarea[j].getElementsByTagName('textarea');
-	
-	var port = chrome.runtime.connect({name: "nofacebook"});
-	port.postMessage({comment: extractor[j]});
+for(var i=0; i<comment.length; i++) {
+	document.getElementsByName('add_comment_text')[i].onkeydown = function(event){
+	    event = event || window.event;
+	    var keycode = event.charCode || event.keyCode;
+	    if(keycode === 13){
+	    	alert('hehe');
+	    }
+	}
 }
 
-/*
-if() {
-		if(extractor[j].value == null) {
-			return false;
-		}
-		else {
-			comment++;
-		}
-	}*/
+var comment_two = document.getElementsByName('add_comment_text_text');
+
+for(var j=0; j<comment_two.length; j++) {
+	document.getElementsByName('add_comment_text_text')[j].onkeydown = function(event){
+	    event = event || window.event;
+	    var keycode = event.charCode || event.keyCode;
+	    if(keycode === 13){
+	        alert('hehe');
+	    }
+	}
+}
+

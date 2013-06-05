@@ -78,7 +78,12 @@ function initcss() {
 chrome.runtime.onConnect.addListener(function(port) {
   console.assert(port.name == "nofacebook");
   port.onMessage.addListener(function(msg) {
-  	alert(msg.like);
-  	alert(msg.comment);
+  	//alert(msg.like);
+  	//alert(msg.comment);
+  	var like = msg.like; //db에 저장만 하면 됨
+  	var comment = msg.comment;
+  	
+  	localStorage.setItem('like', like);
+  	localStorage.setItem('comment', comment);
   });
 });
