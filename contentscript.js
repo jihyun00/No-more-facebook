@@ -6,15 +6,19 @@ console.log(likebutton);
 
 for(var i=0; i<likebutton.length; i++) {
 	likebutton[i].onclick = function() {
+		if(likebutton[?].title == '좋아요 취소') {
+			return false;
+		}
+		else {
 			console.log('click');
 			like++;
 			console.log(like);
 
 			var port = chrome.runtime.connect({name: "nofacebook"});
 			port.postMessage({like: like});
+		}
 	}
 }
-//좋아요 취소 누를 때 없어지는 걸로 오류 수정할 것
 //페이지 바뀌면 좋아요 없어짐 -> 아마 db에 저장하면 수정할 수 있겠지
 
 //댓글 얻어오기
@@ -28,10 +32,12 @@ for(var i=0; i<comment.length; i++) {
 	    var keycode = event.charCode || event.keyCode;
 		    if(keycode === 13){
 		    	if(document.getElementsByName('add_comment_text')[?].value == '댓글 달기...')
-		    		console.log('기록 ㄴㄴ');
+		    		//console.log('기록 ㄴㄴ');
+		    		return false;
 
 		    	else if(document.getElementsByName('add_comment_text')[?].value == '')
-		    		console.log("don't write");
+		    		//console.log("don't write");
+		    		return false;
 
 		    	else {
 		    		commentcount++;
@@ -63,4 +69,4 @@ for(var j=0; j<comment_two.length; j++) {
 	}
 }
 
-port.postMessage({comment: commentcount});
+//port.postMessage({comment: commentcount});
