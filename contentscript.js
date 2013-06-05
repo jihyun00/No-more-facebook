@@ -9,5 +9,17 @@ for(var i=0; i<likebutton.length; i++) {
 			console.log('click');
 			like++;
 			console.log(like);
+
+			var port = chrome.runtime.connect({name: "nofacebook"});
+			port.postMessage({like: like});
 	}
 }
+//좋아요 취소 누를 때 없어지는 걸로 오류 수정할 것
+
+//댓글 얻어오기
+var comment = 0;
+var commentarea = document.getElementsByClassName('UFIList');
+var commentarea = commentarea.offsetHeight;
+
+console.log(commentarea);
+

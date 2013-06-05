@@ -74,29 +74,12 @@ function initcss() {
 	});
 }
 
-
-
-/*
-chrome.extension.onConnect.addListener(function(port) {
-	var tab;
-	tab = port.sender.tab;
-	console.log('added');
-
-	port.onMessage.addListener(function(data) {
-		console.log(data);
-	});
-});*/
-
 chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name == "like");
+  console.assert(port.name == "nofacebook");
   port.onMessage.addListener(function(msg) {
-    if (msg.like == "counting like")
-      //port.postMessage({question: ""});
-  		console.log('counting');
+  	alert(msg.like);
   });
 });
-
-var comment, like = 0;
 
 //좋아요 갯수 측정
 
