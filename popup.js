@@ -114,18 +114,3 @@ var bulletin = function(callback) {
 }
 
 //시간 오류 나는 부분 있음(우리나라 시간이랑 페이스북 시간이랑 안맞으므로 보정필요 ㅜㅜ timezone 9)
-
-
-//댓글 횟수
-var comments = function(callback) {
-  $.ajax({
-    type : 'get',
-    datatype: 'html',
-    url : 'https://www.facebook.com/me/allactivity?privacy_source=activity_log&log_filter=cluster_116',
-    success : function(data) {
-      
-    }
-  });
-}
-
-
