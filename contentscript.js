@@ -26,9 +26,19 @@ for(var i=0; i<comment.length; i++) {
 	document.getElementsByName('add_comment_text')[i].onkeydown = function(event){
 	    event = event || window.event;
 	    var keycode = event.charCode || event.keyCode;
-	    if(keycode === 13){
-	    	alert('hehe');
+		    if(keycode === 13){
+		    	if(document.getElementsByName('add_comment_text')[?].value == '댓글 달기...')
+		    		console.log('기록 ㄴㄴ');
+
+		    	else if(document.getElementsByName('add_comment_text')[?].value == '')
+		    		console.log("don't write");
+
+		    	else {
+		    		commentcount++;
+		    		console.log(commentcount);
+		    	}
 	    }
+
 	}
 }
 
@@ -39,8 +49,18 @@ for(var j=0; j<comment_two.length; j++) {
 	    event = event || window.event;
 	    var keycode = event.charCode || event.keyCode;
 	    if(keycode === 13){
-	        alert('hehe');
+	        if(document.getElementsByName('add_comment_text')[?].value == '댓글 달기...')
+		    		console.log('기록 ㄴㄴ');
+
+	    	else if(document.getElementsByName('add_comment_text')[?].value == '')
+	    		console.log("don't write");
+
+	    	else {
+	    		commentcount++;
+	    		console.log(commentcount);
+	    	}
 	    }
 	}
 }
 
+port.postMessage({comment: commentcount});
