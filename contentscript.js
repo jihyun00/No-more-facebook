@@ -2,7 +2,6 @@
 var likebutton = document.getElementsByClassName('UFILikeLink');
 console.log(likebutton);
 
-
 for(var i=0; i<likebutton.length; i++) {
 	var currLikeButton = likebutton[i];
 	currLikeButton.onclick = function() {

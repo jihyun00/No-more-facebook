@@ -72,15 +72,15 @@ function initcss() {
 	});
 }
 
+var like = 0;
+var comment = 0;
+
 //좋아요 갯수, 댓글 측정
 chrome.runtime.onConnect.addListener(function(port) {
   console.assert(port.name == "nofacebook");
   port.onMessage.addListener(function(msg) {
   	
   	alert(msg.action);
-
-  	var like = 0;
-  	var comment = 0;
 
   	if(msg.action == 'like') {
   		like++;

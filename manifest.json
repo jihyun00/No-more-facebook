@@ -13,7 +13,7 @@
   // Add any of these that you need
   "background": {
   	"page": "background.html"
-  	},
+  },
 
     "content_scripts": [
       {
