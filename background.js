@@ -60,7 +60,6 @@ function changecss() {
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if(tab.url.search('facebook.com') != -1) {
 			chrome.tabs.insertCSS(tabId, {file: "change.css"});
-			//chrome.tabs.executeScript(tabId, {file:"script.js"});
 		}
 	});
 }
@@ -69,7 +68,6 @@ function initcss() {
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if(tab.url.search('facebook.com') != -1) {
 			chrome.tabs.insertCSS(tabId, {file: "init.css"});
-			//chrome.tabs.executeScript(tabId, {file:"delete.js"});
 		}
 	});
 }
@@ -82,7 +80,9 @@ chrome.runtime.onConnect.addListener(function(port) {
   	//alert(msg.comment);
   	var like = msg.like; //db에 저장만 하면 됨
   	var comment = msg.comment;
-  	
+  	// msg.hasOwnProperty('action')
+  	// && msg.action == 'like' then increaseLike
+  	// || msg.action == 'comment' then increaseComment
   	localStorage.setItem('like', like);
   	localStorage.setItem('comment', comment);
   });
