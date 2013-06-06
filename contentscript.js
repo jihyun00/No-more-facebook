@@ -1,6 +1,4 @@
 //좋아요 얻어오기
-var like = 0;
-
 var likebutton = document.getElementsByClassName('UFILikeLink');
 console.log(likebutton);
 
@@ -14,18 +12,14 @@ for(var i=0; i<likebutton.length; i++) {
 		}
 		else {
 			console.log('click');
-			like++;
-			console.log(like);
-			// {'action': 'like'}
+
 			var port = chrome.runtime.connect({name: "nofacebook"});
-			port.postMessage({like: like});
+			port.postMessage({'action': 'like'});
 		}
 	}
 }
 
 //댓글 얻어오기
-var commentcount = 0;
-
 var comment = document.getElementsByName('add_comment_text');
 
 for(var k=0; k<comment.length; k++) {
@@ -41,8 +35,8 @@ for(var k=0; k<comment.length; k++) {
 		    		console.log("don't write");
 
 		    	else {
-		    		commentcount++;
-		    		console.log(commentcount);
+		    		var port = chrome.runtime.connect({name: "nofacebook"});
+					port.postMessage({'action': 'Comment'});
 		    	}
 	    }
 
@@ -64,12 +58,10 @@ for(var j=0; j<comment_two.length; j++) {
 	    		console.log("don't write");
 
 	    	else {
-	    		commentcount++;
-	    		console.log(commentcount);
+	    		var port = chrome.runtime.connect({name: "nofacebook"});
+				port.postMessage({'action': 'Comment'});
 	    	}
 	    }
 	}
 }
-
-//port.postMessage({comment: commentcount});
 
