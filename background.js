@@ -72,6 +72,12 @@ function initcss() {
 	});
 }
 
+//년,월,일 가져오기
+var year = date.getFullYear();
+var month = date.getMonth() + 1;
+var date = date.getDate();
+
+//좋아요, 커맨트 count
 var like = 0;
 var comment = 0;
 

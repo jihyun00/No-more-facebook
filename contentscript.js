@@ -1,23 +1,44 @@
 //좋아요 얻어오기
-var likebutton = document.getElementsByClassName('UFILikeLink');
-console.log(likebutton);
+document.onclick = function(event) {
+	if(event.target.title == 'Unlike this') {
+		console.log('hi');
 
-for(var i=0; i<likebutton.length; i++) {
-	var currLikeButton = likebutton[i];
-	currLikeButton.onclick = function() {
-		console.log("hi>", this);
-		if(this.innerText == '좋아요 취소') {
-			console.log('nono');
-		}
-		else {
-			console.log('click');
-
-			var port = chrome.runtime.connect({name: "nofacebook"});
+		var port = chrome.runtime.connect({name: "nofacebook"});
 			port.postMessage({'action': 'like'});
-		}
 	}
 }
 
+/*
+document.onkeydown = function(event){
+    event = event || window.event;
+    var keycode = event.charCode || event.keyCode;
+    if(keycode === 13){
+    	if(event.target.title == '댓글 달기...') {
+    		//console.log(this.value)
+    		if(event.target.value == '') {
+    			console.log('fail');
+    		}
+
+    		else if(event.target.value == '댓글 달기...') {
+    			console.log('fail again')
+    		}
+
+    		else {
+    			console.log('succeed');
+    		}
+    	}
+	}
+}
+
+document.onkeydown = function(event) {
+	if(event.target.title == 'Unlike this') {
+		console.log('hi');
+
+		var port = chrome.runtime.connect({name: "nofacebook"});
+			port.postMessage({'action': 'like'});
+	}
+}
+*/
 //댓글 얻어오기
 var comment = document.getElementsByName('add_comment_text');
 
@@ -63,4 +84,5 @@ for(var j=0; j<comment_two.length; j++) {
 	    }
 	}
 }
+
 
