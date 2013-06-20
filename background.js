@@ -73,9 +73,21 @@ function initcss() {
 }
 
 //년,월,일 가져오기
-var year = date.getFullYear();
 var month = date.getMonth() + 1;
 var date = date.getDate();
+
+if(month/10 != 0) {
+    month = '0'+ month;
+}
+
+if(date/10 == 0) {
+	date = '0'+ date;
+}
+
+var time = month + '-' + date;
+
+console.log(time);
+
 
 //좋아요, 커맨트 count
 var like = 0;
@@ -89,12 +101,12 @@ chrome.runtime.onConnect.addListener(function(port) {
   	alert(msg.action);
 
   	if(msg.action == 'like') {
-  		like++;
+  		//like++;
   		console.log('like : ' +like);
   	}
 
   	else if(msg.action == 'Comment') {
-  		comment++;
+  		//comment++;
   		console.log('comment : ' + comment);
   	}
   	
