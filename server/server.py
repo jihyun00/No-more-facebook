@@ -23,4 +23,4 @@ def get():
     return 'hi'
 '''
 if __name__ == "__main__":
-    app.run(host="jihyun.nslinkle.com", port=8000, debug=True)
+    app.run(host="jihyun.nslinkle.com", port=9000, debug=True)

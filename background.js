@@ -76,11 +76,11 @@ function initcss() {
 var month = date.getMonth() + 1;
 var date = date.getDate();
 
-if(month/10 != 0) {
+if(month.toString().length == 1) {
     month = '0'+ month;
 }
 
-if(date/10 == 0) {
+if(date.toString().length == 1) {
 	date = '0'+ date;
 }
 
