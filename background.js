@@ -93,6 +93,18 @@ console.log(time);
 var like = 0;
 var comment = 0;
 
+//identifier 얻어오기
+var identifier = function(callback) {
+  $.ajax({
+    type : 'get',
+    datatype: 'json',
+    url: 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+    success: function(data) {
+      console.log(data);
+    }
+  })
+}
+
 //좋아요 갯수, 댓글 측정
 chrome.runtime.onConnect.addListener(function(port) {
   console.assert(port.name == "nofacebook");
@@ -101,13 +113,14 @@ chrome.runtime.onConnect.addListener(function(port) {
   	alert(msg.action);
 
   	if(msg.action == 'like') {
-  		//like++;
   		console.log('like : ' +like);
-  	}
+      data = {'kind':'like', 'identifier':identifier};
+    }
 
   	else if(msg.action == 'Comment') {
   		//comment++;
   		console.log('comment : ' + comment);
+      data = {'kind':'comment', 'identifier':identifier};
   	}
   	
   	localStorage.setItem('like', like);

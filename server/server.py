@@ -17,10 +17,9 @@ def update():
     else:
         return json.dumps({"success": True, "msg": "","content":""})
 
-'''        
 @app.route('/get')
 def get():
     return 'hi'
-'''
+
 if __name__ == "__main__":
     app.run(host="jihyun.nslinkle.com", port=9000, debug=True)

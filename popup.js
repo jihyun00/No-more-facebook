@@ -80,7 +80,7 @@ var bulletin = function(callback) {
     datatype : 'json',
     url : 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,    
     success : function(data) {
-      console.log(data);
+      console.log(data.id);
       console.log(data.posts.data);
       var count = 0;
 
@@ -91,11 +91,11 @@ var bulletin = function(callback) {
       //var hour = date.getHours();
       //hour = hour - 9;
 
-      if(month/10 != 1) {
+      if(month.string().length == 1) {
         month = '0'+ month;
       }
 
-      if(date/10 != 1) {
+      if(date.string().length == 1) {
         date = '0'+ date;
       }
 
