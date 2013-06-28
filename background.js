@@ -72,58 +72,47 @@ function initcss() {
 	});
 }
 
-//년,월,일 가져오기
-var month = date.getMonth() + 1;
-var date = date.getDate();
-
-if(month.toString().length == 1) {
-    month = '0'+ month;
-}
-
-if(date.toString().length == 1) {
-	date = '0'+ date;
-}
-
-var time = month + '-' + date;
-
-console.log(time);
-
-
 //좋아요, 커맨트 count
 var like = 0;
 var comment = 0;
 
+var oauth = localStorage.getItem('oauth2_facebook');
+var oauth = JSON.parse(oauth);
+
 //identifier 얻어오기
-var identifier = function(callback) {
-  $.ajax({
-    type : 'get',
-    datatype: 'json',
-    url: 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
-    success: function(data) {
-      console.log(data);
-    }
-  })
+function identifier(data) {
+	var id;
+	$.ajax({
+		type : 'get',
+		async: false,
+		datatype: 'json',
+		url: 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+		success: function(data) {
+			id = data.id;
+		}
+	});
+	return id;
 }
 
 //좋아요 갯수, 댓글 측정
 chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name == "nofacebook");
-  port.onMessage.addListener(function(msg) {
-  	
-  	alert(msg.action);
+	console.assert(port.name == "nofacebook");
+	port.onMessage.addListener(function(msg) {
 
-  	if(msg.action == 'like') {
-  		console.log('like : ' +like);
-      data = {'kind':'like', 'identifier':identifier};
-    }
+	alert(msg.action);
 
-  	else if(msg.action == 'Comment') {
-  		//comment++;
-  		console.log('comment : ' + comment);
-      data = {'kind':'comment', 'identifier':identifier};
-  	}
-  	
-  	localStorage.setItem('like', like);
-  	localStorage.setItem('comment', comment);
-  });
+	if(msg.action == 'like') {
+		console.log('like : ' +like);
+		data = {'kind':'like', 'identifier':identifier()};
+	}
+
+	else if(msg.action == 'Comment') {
+		//comment++;
+		console.log('comment : ' + comment);
+		data = {'kind':'comment', 'identifier':identifier()};
+	}
+
+	localStorage.setItem('like', like);
+	localStorage.setItem('comment', comment);
+	});
 });
