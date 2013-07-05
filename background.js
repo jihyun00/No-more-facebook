@@ -131,7 +131,7 @@ chrome.runtime.onConnect.addListener(function(port) {
         console.log('Comment Upload Success')
       },
       error: function(request, status, error) {
-        console.log("code:"+request.status +" message:"+request.responseText);
+        console.log("code:"+request.status +" message:"+request.responseText + "error: " + error);
       }
     });
 	}

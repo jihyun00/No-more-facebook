@@ -7,7 +7,6 @@ app = Flask(__name__)
 @app.route('/update', methods=['POST'])
 def update():
     d = json.loads(request.data)
-    print d
     
     if not (d.has_key('kind') and d.has_key('identifier')):
         resp = {
