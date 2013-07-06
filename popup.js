@@ -123,21 +123,22 @@ var bulletin = function(callback) {
         }
         console.log(count);
       }
-      data = {'kind' : 'bulletin', 'identifier': identifier()};
-      bulletin = JSON.stringify(data);
-      $.ajax({
-        type: 'post',
-        data: ,
-        url: 'http://jihyun.nslinkle.com:9000/update',
-        success: function(data) {
-          console.log('Bulletin Upload Success')
-        },
-        error: function(data) {
-          console.log('code:' +request.status + 'message:' +request.responseText)
-        }
-      });
     }
   });
 }
+
+data = {'kind' : 'bulletin', 'identifier': identifier()};
+bulletin = JSON.stringify(data);
+$.ajax({
+  type: 'get',
+  data: bulletin,
+  url: 'http://jihyun.nslinkle.com:9000/update',
+  success: function(data) {
+    console.log('Bulletin Upload Success')
+  },
+  error: function(data) {
+    console.log('code:' +request.status + 'message:' +request.responseText)
+  }
+});
 
 //시간 오류 나는 부분 있음(우리나라 시간이랑 페이스북 시간이랑 안맞으므로 보정필요 ㅜㅜ timezone 9)
