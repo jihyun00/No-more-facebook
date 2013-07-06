@@ -1,14 +1,14 @@
-import json
-
-from flask import Flask, request
+import simplejson as json
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/update', methods=['POST'])
+@app.route('/update', methods=['GET'])
 def update():
-    d = json.loads(request.data)
-    
-    if not (d.has_key('kind') and d.has_key('identifier')):
+    d = json.dumps(request.data)
+    print d
+
+    if not ('kind' in d and 'identifier' in d):
         resp = {
             "success": False,
             "msg": 'There is no kind or identifier in request body',
@@ -17,6 +17,7 @@ def update():
         return json.dumps(resp)
     else:
         return json.dumps({"success": True, "msg": "","content":""})
+    
 
 @app.route('/get')
 def get():

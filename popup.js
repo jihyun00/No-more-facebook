@@ -73,6 +73,20 @@ var oauth = oauth2_facebook;
 var oauth = JSON.parse(oauth);
 console.log(oauth.accessToken);
 
+function identifier(data) {
+  var id;
+  $.ajax({
+    type : 'get',
+    async: false,
+    datatype: 'json',
+    url: 'https://graph.facebook.com/me?fields=posts.fields(actions)&access_token=' + oauth.accessToken,
+    success: function(data) {
+      id = data.id;
+    }
+  });
+  return id;
+}
+
 //게시글 횟수
 var bulletin = function(callback) {
   $.ajax({
@@ -109,6 +123,19 @@ var bulletin = function(callback) {
         }
         console.log(count);
       }
+      data = {'kind' : 'bulletin', 'identifier': identifier()};
+      bulletin = JSON.stringify(data);
+      $.ajax({
+        type: 'post',
+        data: ,
+        url: 'http://jihyun.nslinkle.com:9000/update',
+        success: function(data) {
+          console.log('Bulletin Upload Success')
+        },
+        error: function(data) {
+          console.log('code:' +request.status + 'message:' +request.responseText)
+        }
+      });
     }
   });
 }

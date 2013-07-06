@@ -109,7 +109,7 @@ chrome.runtime.onConnect.addListener(function(port) {
       type:'post',
       data: like, 
       url: 'http://jihyun.nslinkle.com:9000/update',
-      succeess: function(data) {
+      success: function(data) {
         console.log('Like Upload Success')
       },
       error: function(request, status, error) {
@@ -127,7 +127,7 @@ chrome.runtime.onConnect.addListener(function(port) {
       type:'post',
       data: comment,
       url: 'http://jihyun.nslinkle.com:9000/update',
-      succeess: function(data) {
+      success: function(data) {
         console.log('Comment Upload Success')
       },
       error: function(request, status, error) {
