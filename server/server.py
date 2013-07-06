@@ -1,5 +1,8 @@
 import simplejson as json
+import db
+
 from flask import Flask, request, jsonify
+
 
 app = Flask(__name__)
 
@@ -10,7 +13,7 @@ def update():
 
     if not ('kind' in d and 'identifier' in d):
         resp = {
-            "success": False,
+            "success": False, #added code which insert data to db
             "msg": 'There is no kind or identifier in request body',
 	    "content": ""
 	}

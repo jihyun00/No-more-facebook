@@ -106,7 +106,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 		data = {'kind':'like', 'identifier':identifier()}
     like = JSON.stringify(data);
     $.ajax({
-      type:'post',
+      type:'get',
       data: like, 
       url: 'http://jihyun.nslinkle.com:9000/update',
       success: function(data) {
@@ -124,7 +124,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 		data = {'kind':'comment', 'identifier':identifier()};
     comment = JSON.stringify(data);
     $.ajax({
-      type:'post',
+      type:'get',
       data: comment,
       url: 'http://jihyun.nslinkle.com:9000/update',
       success: function(data) {
