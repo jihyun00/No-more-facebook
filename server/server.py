@@ -1,26 +1,19 @@
 import simplejson as json
-import db
 
+from model import Count
 from flask import Flask, request, jsonify
-
 
 app = Flask(__name__)
 
-@app.route('/update', methods=['GET'])
+@app.route('/update', methods=['POST'])
 def update():
-    d = json.dumps(request.data)
-    print d
-
-    if not ('kind' in d and 'identifier' in d):
-        resp = {
-            "success": False, #added code which insert data to db
-            "msg": 'There is no kind or identifier in request body',
-	    "content": ""
-	}
-        return json.dumps(resp)
+    data = json.dumps(request.data)
+    data = json.loads(data)
+    if 'kind' and 'identifier' in data:
+        #add_data = Count.upsert(kind, identifier)
+        return request.data
     else:
-        return json.dumps({"success": True, "msg": "","content":""})
-    
+        return 'There is no "kind" or "identifier"'
 
 @app.route('/get')
 def get():
