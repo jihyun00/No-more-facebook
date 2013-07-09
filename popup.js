@@ -128,9 +128,8 @@ var bulletin = function(callback) {
 }
 
 data = {'kind' : 'bulletin', 'identifier': identifier()};
-bulletin = JSON.stringify(data);
 $.ajax({
-  type: 'get',
+  type: 'post',
   data: bulletin,
   url: 'http://jihyun.nslinkle.com:9000/update',
   success: function(data) {

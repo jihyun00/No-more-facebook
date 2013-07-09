@@ -102,11 +102,9 @@ chrome.runtime.onConnect.addListener(function(port) {
 	alert(msg.action);
 
 	if(msg.action == 'like') {
-		console.log('like : ' +like);
-		data = {'kind':'like', 'identifier':identifier()}
-    like = JSON.stringify(data);
+		like = {'kind':'like', 'identifier':identifier()}
     $.ajax({
-      type:'get',
+      type:'post',
       data: like, 
       url: 'http://jihyun.nslinkle.com:9000/update',
       success: function(data) {
@@ -119,12 +117,9 @@ chrome.runtime.onConnect.addListener(function(port) {
 	}
 
 	else if(msg.action == 'Comment') {
-		//comment++;
-		console.log('comment : ' + comment);
-		data = {'kind':'comment', 'identifier':identifier()};
-    comment = JSON.stringify(data);
+		comment = {'kind':'comment', 'identifier':identifier()};
     $.ajax({
-      type:'get',
+      type:'post',
       data: comment,
       url: 'http://jihyun.nslinkle.com:9000/update',
       success: function(data) {
