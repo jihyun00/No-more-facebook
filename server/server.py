@@ -1,23 +1,16 @@
-import simplejson as json
-
-from model import Count
-from flask import Flask, request, jsonify
+import json
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/update', methods=['POST'])
+@app.route('/', methods=['POST'])
 def update():
-    data = json.dumps(request.data)
-    data = json.loads(data)
+    data = json.loads(request.data)
     if 'kind' and 'identifier' in data:
-        #add_data = Count.upsert(kind, identifier)
         return request.data
-    else:
-        return 'There is no "kind" or "identifier"'
 
-@app.route('/get')
-def get():
-    return 'hi'
+    else:
+        return 'identifier or kind is not in data'
 
 if __name__ == "__main__":
-    app.run(host="jihyun.nslinkle.com", port=9000, debug=True)
+    app.run(host="127.0.0.1", port=8000, debug=True)

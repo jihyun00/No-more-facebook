@@ -102,13 +102,16 @@ chrome.runtime.onConnect.addListener(function(port) {
 	alert(msg.action);
 
 	if(msg.action == 'like') {
-		like = {'kind':'like', 'identifier':identifier()}
+    var data = {"kind":"like", "identifier":identifier()}
+    var like = JSON.stringify(data);
     $.ajax({
-      type:'post',
-      data: like, 
-      url: 'http://jihyun.nslinkle.com:9000/update',
+      type:'POST',
+      dataType:'json',
+      data: like,
+      url: 'http://127.0.0.1:8000/',
       success: function(data) {
-        console.log('Like Upload Success')
+        console.log('Like Upload Success');
+        console.log(data);
       },
       error: function(request, status, error) {
         console.log("code:"+request.status +" message:"+request.responseText);
@@ -117,13 +120,17 @@ chrome.runtime.onConnect.addListener(function(port) {
 	}
 
 	else if(msg.action == 'Comment') {
-		comment = {'kind':'comment', 'identifier':identifier()};
+    var data = {"kind":"comment", "identifier":identifier()}
+    var comment = JSON.stringify(data);
     $.ajax({
-      type:'post',
+      type:'POST',
+      dataType:'json',
       data: comment,
-      url: 'http://jihyun.nslinkle.com:9000/update',
+      url: 'http://127.0.0.1:8000/',
+      contentType: "application/json",
       success: function(data) {
-        console.log('Comment Upload Success')
+        console.log('Comment Upload Success');
+        console.log(data);
       },
       error: function(request, status, error) {
         console.log("code:"+request.status +" message:"+request.responseText + "error: " + error);
@@ -131,6 +138,49 @@ chrome.runtime.onConnect.addListener(function(port) {
     });
 	}
 
+  /*
+  if(msg.action == 'like') {
+    var likeSocket = new WebSocket('ws://jihyun.nslinkle.com:9000/update');
+    likeSocket.onmessage = function(e) {
+      alert(e.data);
+    }
+    likeSocket.onopen = function(e) {
+      alert('서버 연결');
+      commentSocket.send(JSON.stringify(message));
+    }
+    likeSocket.onclose = function(e) {
+      alert('서버연결 종료');
+      alert(send());
+    }
+    function send() {
+      var message = {
+        'kind': 'like',
+        'identifier': identifier()
+      };
+    }
+  }
+
+  else if(msg.action == 'Comment') {
+    var commentSocket = new WebSocket('ws://jihyun.nslinkle.com/chrome/No-more-facebook/server/server.py');
+    commentSocket.onmessage = function(e) {
+      alert(e.data);
+    }
+    commentSocket.onopen = function(e) {
+      //commentSocket.send(JSON.stringify(message));
+      alert('서버 연결');  
+    }
+    commentSocket.onclose = function(e) {
+      alert('서버연결 종료');
+      alert(e.data);
+    }
+    function send() {
+      var message = {
+        'kind': 'comment',
+        'identifier': identifier()
+      };
+    }
+  }
+ */ 
 	localStorage.setItem('like', like);
 	localStorage.setItem('comment', comment);
 	});
